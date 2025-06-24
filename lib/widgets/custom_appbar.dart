@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:notes_app/widgets/custom_search_button.dart';
 
 class CustomAppbar extends StatelessWidget {
   const CustomAppbar({super.key});
@@ -10,21 +11,11 @@ class CustomAppbar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text('Notes', style: TextStyle(fontFamily: 'Roboto', fontSize: 22)),
-          ElevatedButton(
-            onPressed: () {},
-            style: ElevatedButton.styleFrom(
-              padding: EdgeInsets.all(0),
-              splashFactory: InkRipple.splashFactory,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(13),
-              ),
-              minimumSize: Size(42, 42),
-            ),
-            child: Icon(Icons.search, size: 25),
-          ),
+          Text('Notes', style: TextStyle(fontSize: 22)),
+          CustomSearchButton(),
         ],
       ),
     );
   }
 }
+
