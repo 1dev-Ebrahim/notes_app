@@ -8,12 +8,12 @@ class CustomSearchButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: () {},
       style: ElevatedButton.styleFrom(
-        padding: EdgeInsets.all(0),
+        padding: const EdgeInsets.all(0),
         splashFactory: InkRipple.splashFactory,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        minimumSize: Size(45, 45),
+        minimumSize: const Size(45, 45),
       ),
-      child: Icon(Icons.search, size: 27),
+      child: const Icon(Icons.search, size: 27),
     );
   }
 }

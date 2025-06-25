@@ -6,6 +6,6 @@ class NotesViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: [Expanded(child: NotesListView())]);
+    return const Column(children: [Expanded(child: NotesListView())]);
   }
 }
