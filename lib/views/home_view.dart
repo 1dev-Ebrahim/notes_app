@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:notes_app/widgets/note_item.dart';
+import 'package:notes_app/widgets/custom_search_button.dart';
 import 'package:notes_app/widgets/notes_view_body.dart';
 
 class HomeView extends StatelessWidget {
@@ -7,6 +7,26 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(body: SafeArea(child: NotesViewBody()));
+    return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
+        backgroundColor: Colors.blue.shade300,
+        child: Icon(Icons.add, color: Colors.black),
+      ),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        scrolledUnderElevation: 0,
+        title: const Text('Notes', style: TextStyle(fontSize: 22)),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 16.0),
+            child: const CustomSearchButton(),
+          ),
+        ],
+      ),
+      body: const NotesViewBody(),
+    );
   }
 }
