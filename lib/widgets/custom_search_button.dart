@@ -13,7 +13,7 @@ class CustomSearchButton extends StatelessWidget {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         minimumSize: Size(45, 45),
       ),
-      child: Icon(Icons.search, size: 27, color: Colors.white),
+      child: Icon(Icons.search, size: 27),
     );
   }
 }
