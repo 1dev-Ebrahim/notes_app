@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:notes_app/constants.dart';
 import 'package:notes_app/widgets/add_note_bottom_sheet.dart';
 import 'package:notes_app/widgets/custom_search_button.dart';
-import 'package:notes_app/widgets/notes_view_body.dart';
+import 'package:notes_app/widgets/notes_list_view.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -35,7 +35,7 @@ class HomeView extends StatelessWidget {
           ),
         ],
       ),
-      body: const NotesViewBody(),
+      body: const NotesListView(),
     );
   }
 }
