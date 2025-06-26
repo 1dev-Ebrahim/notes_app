@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:notes_app/constants.dart';
 import 'package:notes_app/widgets/add_note_bottom_sheet.dart';
 import 'package:notes_app/widgets/custom_search_button.dart';
 import 'package:notes_app/widgets/notes_view_body.dart';
@@ -18,7 +19,7 @@ class HomeView extends StatelessWidget {
           );
         },
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
-        backgroundColor: Colors.blue.shade300,
+        backgroundColor: kPrimaryColor,
         child: const Icon(Icons.add, color: Colors.black),
       ),
       appBar: AppBar(
