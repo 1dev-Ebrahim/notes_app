@@ -16,6 +16,7 @@ class HomeView extends StatelessWidget {
             context: context,
             builder: (context) => const AddNoteBottomSheet(),
             showDragHandle: true,
+            isScrollControlled: true,
           );
         },
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
