@@ -8,6 +8,7 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      keyboardType: TextInputType.multiline,
       cursorColor: kPrimaryColor,
       maxLines: maxLines,
       decoration: InputDecoration(
