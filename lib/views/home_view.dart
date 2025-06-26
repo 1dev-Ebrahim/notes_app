@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:notes_app/constants.dart';
 import 'package:notes_app/widgets/add_note_bottom_sheet.dart';
-import 'package:notes_app/widgets/custom_search_button.dart';
+import 'package:notes_app/widgets/custom_appbar.dart';
+import 'package:notes_app/widgets/custom_appbar_button.dart';
 import 'package:notes_app/widgets/notes_list_view.dart';
 
 class HomeView extends StatelessWidget {
@@ -23,18 +24,7 @@ class HomeView extends StatelessWidget {
         backgroundColor: kPrimaryColor,
         child: const Icon(Icons.add, color: Colors.black),
       ),
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        scrolledUnderElevation: 0,
-        title: const Text('Notes', style: TextStyle(fontSize: 22)),
-        actions: const [
-          Padding(
-            padding: EdgeInsets.only(right: 16.0),
-            child: CustomSearchButton(),
-          ),
-        ],
-      ),
+      appBar: CustomAppBar(title: 'Notes', iconData: Icons.search, onPressed: (){},),
       body: const NotesListView(),
     );
   }
