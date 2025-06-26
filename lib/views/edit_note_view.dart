@@ -3,7 +3,7 @@ import 'package:notes_app/widgets/edit_note_view_body.dart';
 
 class EditNoteView extends StatelessWidget {
   const EditNoteView({super.key});
-
+  static const String id = 'EditNoteView';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -13,7 +13,9 @@ class EditNoteView extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(right: 16.0),
             child: IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pop(context);
+              },
               icon: const Icon(Icons.done),
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color.fromARGB(10, 255, 255, 255),
