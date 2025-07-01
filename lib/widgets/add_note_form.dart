@@ -1,8 +1,7 @@
-import 'dart:developer';
-
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:notes_app/cubits/add_note_cubit.dart';
+import 'package:notes_app/cubits/add_note_state.dart';
 import 'package:notes_app/models/note_model.dart';
 import 'package:notes_app/widgets/custom_elevated_button.dart';
 import 'package:notes_app/widgets/custom_text_field.dart';
@@ -40,27 +39,31 @@ class _AddNoteFormState extends State<AddNoteForm> {
             },
           ),
           const SizedBox(height: 80),
-          CustomElevatedButton(
-            onPressed: () {
-              if (formKey.currentState!.validate()) {
-                log(title!);
-                log(subTitle!);
-                log(DateTime.now().toString());
-                NoteModel newNoteModel = NoteModel(
-                  title: title!,
-                  subTitle: subTitle!,
-                  date: DateTime.now().toString(),
-                  color: 0,
-                );
-                BlocProvider.of<AddNoteCubit>(context).addNote(newNoteModel);
-                formKey.currentState!.save();
-              } else {
-                setState(() {
-                  autoValidateMode = AutovalidateMode.always;
-                });
-              }
+          BlocBuilder<AddNoteCubit, AddNoteState>(
+            builder: (context, state) {
+              return CustomElevatedButton(
+                onPressed: () {
+                  if (formKey.currentState!.validate()) {
+                    NoteModel newNoteModel = NoteModel(
+                      title: title!,
+                      subTitle: subTitle!,
+                      date: DateTime.now().toString(),
+                      color: 0,
+                    );
+                    BlocProvider.of<AddNoteCubit>(
+                      context,
+                    ).addNote(newNoteModel);
+                    formKey.currentState!.save();
+                  } else {
+                    setState(() {
+                      autoValidateMode = AutovalidateMode.always;
+                    });
+                  }
+                },
+                buttonText: 'Add',
+                isLoading: state is AddNoteLoadingState,
+              );
             },
-            buttonText: 'Add',
           ),
           const SizedBox(height: 20),
         ],

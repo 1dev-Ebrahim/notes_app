@@ -6,9 +6,11 @@ class CustomElevatedButton extends StatelessWidget {
     super.key,
     required this.buttonText,
     required this.onPressed,
+    required this.isLoading,
   });
   final String buttonText;
   final VoidCallback onPressed;
+  final bool isLoading;
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
@@ -22,14 +24,21 @@ class CustomElevatedButton extends StatelessWidget {
           Size(MediaQuery.of(context).size.width, 55),
         ),
       ),
-      child: Text(
-        buttonText,
-        style: const TextStyle(
-          color: Colors.black,
-          fontWeight: FontWeight.bold,
-          fontSize: 17,
-        ),
-      ),
+      child:
+          isLoading
+              ? const SizedBox(
+                height: 25,
+                width: 25,
+                child: CircularProgressIndicator(color: Colors.blue),
+              )
+              : Text(
+                buttonText,
+                style: const TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 17,
+                ),
+              ),
     );
   }
 }
