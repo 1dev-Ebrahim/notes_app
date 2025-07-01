@@ -1,4 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:notes_app/cubits/add_note_cubit.dart';
+import 'package:notes_app/models/note_model.dart';
 import 'package:notes_app/widgets/custom_elevated_button.dart';
 import 'package:notes_app/widgets/custom_text_field.dart';
 
@@ -9,7 +14,7 @@ class AddNoteForm extends StatefulWidget {
 }
 
 class _AddNoteFormState extends State<AddNoteForm> {
-  String? title, subtitle;
+  String? title, subTitle;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   AutovalidateMode autoValidateMode = AutovalidateMode.disabled;
   @override
@@ -31,13 +36,23 @@ class _AddNoteFormState extends State<AddNoteForm> {
             hintText: 'Content',
             maxLines: 5,
             onSaved: (value) {
-              title = value;
+              subTitle = value;
             },
           ),
           const SizedBox(height: 80),
           CustomElevatedButton(
             onPressed: () {
               if (formKey.currentState!.validate()) {
+                log(title!);
+                log(subTitle!);
+                log(DateTime.now().toString());
+                NoteModel newNoteModel = NoteModel(
+                  title: title!,
+                  subTitle: subTitle!,
+                  date: DateTime.now().toString(),
+                  color: 0,
+                );
+                BlocProvider.of<AddNoteCubit>(context).addNote(newNoteModel);
                 formKey.currentState!.save();
               } else {
                 setState(() {

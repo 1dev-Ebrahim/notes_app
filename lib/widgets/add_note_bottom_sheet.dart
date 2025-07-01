@@ -12,7 +12,6 @@ class AddNoteBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // bool isLoading = false;
     return AnimatedPadding(
       duration: const Duration(milliseconds: 0),
       curve: Curves.ease,
@@ -22,16 +21,17 @@ class AddNoteBottomSheet extends StatelessWidget {
         bottom: MediaQuery.of(context).viewInsets.bottom,
       ),
       child: BlocConsumer<AddNoteCubit, AddNoteState>(
-        listener: (context, state) {},
-        builder: (context, state) {
+        listener: (context, state) {
           if (state is AddNoteFailureState) {
             log(state.errorMessage);
+            print(state.errorMessage);
             customSnackBar(
               context,
               contentText: 'Unexpected error occoured please try again',
               backgroundColor: Colors.red,
             );
           } else if (state is AddNoteSuccessState) {
+            print('Scuccess!');
             customSnackBar(
               context,
               contentText: 'Note has been added successfully',
@@ -39,8 +39,10 @@ class AddNoteBottomSheet extends StatelessWidget {
             );
             Navigator.pop(context);
           }
+        },
+        builder: (context, state) {
           return ModalProgressHUD(
-            inAsyncCall: state is AddNoteLoadingState,
+            inAsyncCall: state is AddNoteLoadingState ? true : false,
             child: const AddNoteForm(),
           );
         },
