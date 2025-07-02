@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:notes_app/constants.dart';
-import 'package:notes_app/cubits/add_note_cubit/notes_cubit/notes_cubit.dart';
+import 'package:notes_app/cubits/notes_cubit/notes_cubit.dart';
 import 'package:notes_app/widgets/add_note_bottom_sheet.dart';
 import 'package:notes_app/widgets/custom_appbar.dart';
 import 'package:notes_app/widgets/notes_list_view.dart';
@@ -9,6 +9,7 @@ import 'package:notes_app/widgets/notes_list_view.dart';
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
   static const String id = 'HomeView';
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -18,7 +19,7 @@ class HomeView extends StatelessWidget {
           onPressed: () {
             showModalBottomSheet(
               context: context,
-              builder: (context) => const AddNoteBottomSheet(),
+              builder: (contextc) => const AddNoteBottomSheet(),
               showDragHandle: true,
               isScrollControlled: true,
             );
