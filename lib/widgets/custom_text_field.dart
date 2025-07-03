@@ -6,16 +6,19 @@ class CustomTextField extends StatelessWidget {
     super.key,
     required this.hintText,
     this.maxLines = 1,
-    this.onSaved,
+    this.onChanged,
+    this.controller,
   });
   final int maxLines;
   final String hintText;
-  final void Function(String?)? onSaved;
+  final void Function(String?)? onChanged;
+  final TextEditingController? controller;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      onChanged: onSaved,
+      controller: controller,
+      onChanged: onChanged,
       validator: (value) {
         if (value?.isEmpty ?? true) {
           return 'This field can\'t be empty';

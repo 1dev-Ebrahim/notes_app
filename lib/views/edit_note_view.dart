@@ -1,23 +1,47 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:notes_app/cubits/edit_note_cubit/edit_note_cubit.dart';
+import 'package:notes_app/cubits/notes_cubit/notes_cubit.dart';
+import 'package:notes_app/models/note_model.dart';
 import 'package:notes_app/widgets/custom_appbar.dart';
 import 'package:notes_app/widgets/edit_note_view_body.dart';
 
-class EditNoteView extends StatelessWidget {
-  const EditNoteView({super.key});
+class EditNoteView extends StatefulWidget {
+  const EditNoteView({super.key, required this.noteModel});
   static const String id = 'EditNoteView';
+  final NoteModel noteModel;
+
+  @override
+  State<EditNoteView> createState() => _EditNoteViewState();
+}
+
+class _EditNoteViewState extends State<EditNoteView> {
+  @override
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => EditNoteCubit(),
-      child: Scaffold(
-        appBar: CustomAppBar(
-          title: 'Edit Note',
-          iconData: Icons.done,
-          onPressed: () {},
-        ),
-        body: const EditNoteViewBody(),
+      child: Builder(
+        builder: (context) {
+          return Scaffold(
+            appBar: CustomAppBar(
+              title: 'Edit Note',
+              iconData: Icons.done,
+              onPressed: () {
+                final cubit = context.read<EditNoteCubit>();
+                log(cubit.title.toString());
+                widget.noteModel.title = cubit.title!;
+                widget.noteModel.subTitle = cubit.subTitle!;
+                widget.noteModel.save();
+                BlocProvider.of<NotesCubit>(context).fetchNotes();
+                Navigator.pop(context);
+              },
+            ),
+            body: EditNoteViewBody(noteModel: widget.noteModel),
+          );
+        },
       ),
     );
   }

@@ -6,7 +6,7 @@ class EditNoteCubit extends Cubit<EditNoteState> {
   String? title;
   String? subTitle;
 
-  editNote(String? title, String subTitle) {
+  setNote(String? title, String subTitle) {
     this.title = title;
     this.subTitle = subTitle;
   }

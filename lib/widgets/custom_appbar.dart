@@ -21,7 +21,10 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       actions: [
         Padding(
           padding: const EdgeInsets.only(right: 16.0),
-          child: CustomAppBarButton(iconData: iconData, onPressed: onPressed),
+          child: CustomAppBarButton(
+            iconData: iconData,
+            onPressed: onPressed,
+          ),
         ),
       ],
     );
