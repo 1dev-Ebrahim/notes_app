@@ -49,7 +49,9 @@ class NoteItem extends StatelessWidget {
                 ),
               ),
               trailing: IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  noteModel.delete();
+                },
                 style: ButtonStyle(
                   splashFactory: InkRipple.splashFactory,
                   overlayColor: WidgetStateProperty.all(
