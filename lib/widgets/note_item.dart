@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:notes_app/models/note_model.dart';
 import 'package:notes_app/views/edit_note_view.dart';
 
 class NoteItem extends StatelessWidget {
-  const NoteItem({super.key});
-
+  const NoteItem({super.key, required this.noteModel});
+  final NoteModel noteModel;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -28,19 +29,19 @@ class NoteItem extends StatelessWidget {
             ListTile(
               contentPadding: const EdgeInsets.only(right: 0),
               enableFeedback: true,
-              title: const Text(
-                'I\'m Just A Note',
-                style: TextStyle(
+              title: Text(
+                noteModel.title,
+                style: const TextStyle(
                   color: Colors.black,
                   fontSize: 26,
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              subtitle: const Padding(
-                padding: EdgeInsets.symmetric(vertical: 16.0),
+              subtitle: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 16.0),
                 child: Text(
-                  'Testing My Last Project In Course',
-                  style: TextStyle(
+                  noteModel.subTitle,
+                  style: const TextStyle(
                     color: Color.fromARGB(125, 0, 0, 0),
                     fontSize: 18,
                     overflow: TextOverflow.clip,
@@ -62,11 +63,11 @@ class NoteItem extends StatelessWidget {
                 ),
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.only(right: 16.0),
+            Padding(
+              padding: const EdgeInsets.only(right: 16.0),
               child: Text(
-                'May 21,2022',
-                style: TextStyle(
+                noteModel.date,
+                style: const TextStyle(
                   color: Color.fromARGB(125, 0, 0, 0),
                   fontSize: 13,
                 ),
