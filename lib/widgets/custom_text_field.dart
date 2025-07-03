@@ -15,7 +15,7 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      onChanged: onSaved,
+      onSaved: onSaved,
       validator: (value) {
         if (value?.isEmpty ?? true) {
           return 'This field can\'t be empty';
