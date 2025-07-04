@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:notes_app/cubits/edit_note_cubit/edit_note_cubit.dart';
@@ -30,13 +28,21 @@ class _EditNoteViewState extends State<EditNoteView> {
               title: 'Edit Note',
               iconData: Icons.done,
               onPressed: () {
-                final cubit = context.read<EditNoteCubit>();
-                log(cubit.title.toString());
-                widget.noteModel.title = cubit.title!;
-                widget.noteModel.subTitle = cubit.subTitle!;
-                widget.noteModel.save();
-                BlocProvider.of<NotesCubit>(context).fetchNotes();
-                Navigator.pop(context);
+                if (BlocProvider.of<EditNoteCubit>(
+                  context,
+                ).formKey.currentState!.validate()) {
+                  final cubit = context.read<EditNoteCubit>();
+                  widget.noteModel.title = cubit.title!;
+                  widget.noteModel.subTitle = cubit.subTitle!;
+                  widget.noteModel.save();
+                  BlocProvider.of<NotesCubit>(context).fetchNotes();
+                  Navigator.pop(context);
+                } else {
+                  setState(() {
+                    BlocProvider.of<EditNoteCubit>(context).autovalidateMode =
+                        AutovalidateMode.always;
+                  });
+                }
               },
             ),
             body: EditNoteViewBody(noteModel: widget.noteModel),
