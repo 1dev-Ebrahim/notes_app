@@ -53,7 +53,7 @@ class _AddNoteFormState extends State<AddNoteForm> {
                       title: title!,
                       subTitle: subTitle!,
                       date: DateFormat('MMM d, yyyy').format(DateTime.now()),
-                      color: 0,
+                      color: BlocProvider.of<AddNoteCubit>(context).color.value,
                     );
                     BlocProvider.of<AddNoteCubit>(
                       context,
