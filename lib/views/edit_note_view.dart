@@ -34,6 +34,7 @@ class _EditNoteViewState extends State<EditNoteView> {
                   final cubit = context.read<EditNoteCubit>();
                   widget.noteModel.title = cubit.title!;
                   widget.noteModel.subTitle = cubit.subTitle!;
+                  widget.noteModel.color = cubit.color.value;
                   widget.noteModel.save();
                   BlocProvider.of<NotesCubit>(context).fetchNotes();
                   Navigator.pop(context);

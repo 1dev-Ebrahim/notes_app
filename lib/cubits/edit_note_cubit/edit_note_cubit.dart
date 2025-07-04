@@ -6,6 +6,7 @@ class EditNoteCubit extends Cubit<EditNoteState> {
   EditNoteCubit() : super(EditNoteInitialState());
   String? title;
   String? subTitle;
+  late Color color;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
   setNote(String? title, String subTitle) {

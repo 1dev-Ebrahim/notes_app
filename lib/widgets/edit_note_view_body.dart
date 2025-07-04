@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:notes_app/cubits/edit_note_cubit/edit_note_cubit.dart';
 import 'package:notes_app/models/note_model.dart';
+import 'package:notes_app/widgets/add_note_color_list_view.dart';
 import 'package:notes_app/widgets/custom_text_field.dart';
+import 'package:notes_app/widgets/edit_note_color_list_view.dart';
 
 class EditNoteViewBody extends StatefulWidget {
   const EditNoteViewBody({super.key, required this.noteModel});
@@ -20,6 +22,7 @@ class _EditNoteViewBodyState extends State<EditNoteViewBody> {
     ).setNote(widget.noteModel.title, widget.noteModel.subTitle);
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -48,6 +51,8 @@ class _EditNoteViewBodyState extends State<EditNoteViewBody> {
                 BlocProvider.of<EditNoteCubit>(context).subTitle = value;
               },
             ),
+            const SizedBox(height: 20),
+            EditNoteColorListView(noteModel: widget.noteModel),
           ],
         ),
       ),
