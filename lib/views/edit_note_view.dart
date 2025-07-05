@@ -25,7 +25,7 @@ class _EditNoteViewState extends State<EditNoteView> {
         builder: (context) {
           return Scaffold(
             appBar: CustomAppBar(
-              title: 'Edit Note',
+              title: const Text('EditNotes', style: const TextStyle(fontSize: 25)),
               iconData: Icons.done,
               onPressed: () {
                 if (BlocProvider.of<EditNoteCubit>(

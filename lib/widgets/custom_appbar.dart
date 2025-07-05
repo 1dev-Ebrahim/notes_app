@@ -5,11 +5,11 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({
     super.key,
     required this.title,
-    required this.iconData,
+    this.iconData,
     required this.onPressed,
   });
-  final String title;
-  final IconData iconData;
+  final Widget title;
+  final IconData? iconData;
   final VoidCallback onPressed;
   @override
   Widget build(BuildContext context) {
@@ -17,14 +17,17 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: Colors.transparent,
       elevation: 0,
       scrolledUnderElevation: 0,
-      title: Text(title, style: const TextStyle(fontSize: 25)),
+      title: title,
       actions: [
         Padding(
           padding: const EdgeInsets.only(right: 16.0),
-          child: CustomAppBarButton(
-            iconData: iconData,
-            onPressed: onPressed,
-          ),
+          child:
+              iconData == null
+                  ? null
+                  : CustomAppBarButton(
+                    iconData: iconData!,
+                    onPressed: onPressed,
+                  ),
         ),
       ],
     );

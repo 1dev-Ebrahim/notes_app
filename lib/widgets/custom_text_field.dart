@@ -8,11 +8,15 @@ class CustomTextField extends StatelessWidget {
     this.maxLines = 1,
     this.onChanged,
     this.controller,
+    this.closeIcon,
+    this.onPressed,
   });
   final int maxLines;
   final String hintText;
   final void Function(String?)? onChanged;
   final TextEditingController? controller;
+  final bool? closeIcon;
+  final void Function()? onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +35,13 @@ class CustomTextField extends StatelessWidget {
       decoration: InputDecoration(
         hintText: hintText,
         hintStyle: const TextStyle(color: kPrimaryColor),
+        suffixIcon:
+            closeIcon == null
+                ? null
+                : IconButton(
+                  icon: const Icon(Icons.close),
+                  onPressed: onPressed!,
+                ),
         border: buildBorder(borderColor: Colors.white),
         enabledBorder: buildBorder(borderColor: Colors.white),
         focusedBorder: buildBorder(borderColor: kPrimaryColor),
