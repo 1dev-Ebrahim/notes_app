@@ -8,18 +8,24 @@ import 'package:notes_app/views/edit_note_view.dart';
 class NoteItem extends StatelessWidget {
   const NoteItem({super.key, required this.noteModel});
   final NoteModel noteModel;
+
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) {
-              return EditNoteView(noteModel: noteModel);
-            },
-          ),
-        );
+    return Dismissible(
+      key: Key(noteModel.key.toString()),
+      direction: DismissDirection.endToStart,
+      background: Container(
+        decoration: BoxDecoration(
+          color: Colors.red,
+          borderRadius: BorderRadius.circular(20),
+        ),
+        alignment: Alignment.centerRight,
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: const Icon(Icons.delete, color: Colors.white),
+      ),
+      onDismissed: (direction) {
+        noteModel.delete();
+        BlocProvider.of<NotesCubit>(context).fetchNotes();
       },
       child: Container(
         padding: const EdgeInsets.only(
@@ -59,8 +65,14 @@ class NoteItem extends StatelessWidget {
               ),
               trailing: IconButton(
                 onPressed: () {
-                  noteModel.delete();
-                  BlocProvider.of<NotesCubit>(context).fetchNotes();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return EditNoteView(noteModel: noteModel);
+                      },
+                    ),
+                  );
                 },
                 style: ButtonStyle(
                   splashFactory: InkRipple.splashFactory,
@@ -69,7 +81,7 @@ class NoteItem extends StatelessWidget {
                   ),
                 ),
                 icon: const Icon(
-                  FontAwesomeIcons.trash,
+                  FontAwesomeIcons.penToSquare,
                   color: Colors.black,
                   size: 24,
                 ),

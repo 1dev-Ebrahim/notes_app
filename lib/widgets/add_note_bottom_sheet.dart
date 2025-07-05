@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:notes_app/cubits/add_note_cubit/add_note_cubit.dart';
@@ -23,10 +22,18 @@ class AddNoteBottomSheet extends StatelessWidget {
         child: BlocConsumer<AddNoteCubit, AddNoteState>(
           listener: (context, state) {
             if (state is AddNoteFailureState) {
-              log(state.errorMessage);
+              customSnackBar(
+                context,
+                contentText: 'An Error has Occoured, Please Try Again',
+                backgroundColor: Colors.red,
+              );
             } else if (state is AddNoteSuccessState) {
-              log('Scuccess!');
               Navigator.pop(context);
+              customSnackBar(
+                context,
+                contentText: 'New Note Added has been Successfully',
+                backgroundColor: Colors.green,
+              );
             }
           },
           builder:
