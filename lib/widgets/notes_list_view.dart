@@ -5,7 +5,6 @@ import 'package:notes_app/cubits/notes_cubit/notes_state.dart';
 import 'package:notes_app/cubits/search_cubit/search_State.dart';
 import 'package:notes_app/cubits/search_cubit/search_cubit.dart';
 import 'package:notes_app/models/note_model.dart';
-import 'package:notes_app/widgets/custom_text_field.dart';
 import 'package:notes_app/widgets/note_item.dart';
 
 class NotesListView extends StatefulWidget {

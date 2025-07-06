@@ -4,7 +4,7 @@ import 'package:notes_app/constants.dart';
 import 'package:notes_app/cubits/search_cubit/search_cubit.dart';
 import 'package:notes_app/widgets/add_note_bottom_sheet.dart';
 import 'package:notes_app/widgets/custom_appbar.dart';
-import 'package:notes_app/widgets/custom_text_field.dart';
+import 'package:notes_app/widgets/cutsom_search_appbar.dart';
 import 'package:notes_app/widgets/notes_list_view.dart';
 
 class HomeView extends StatefulWidget {
@@ -16,8 +16,6 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  bool isSearching = false;
-  IconData? appBarIcon = Icons.search;
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -40,34 +38,29 @@ class _HomeViewState extends State<HomeView> {
               backgroundColor: kPrimaryColor,
               child: const Icon(Icons.add, color: Colors.black),
             ),
-            appBar: CustomAppBar(
-              title: AnimatedSwitcher(
-                duration: const Duration(milliseconds: 1000),
-                child:
-                    isSearching
-                        ? CustomTextField(
-                          hintText: 'search',
-                          onChanged: (value) {
-                            BlocProvider.of<SearchCubit>(
-                              context,
-                            ).changeSearchText(value!);
-                          },
-                          closeIcon: true,
+            appBar:
+                BlocProvider.of<SearchCubit>(context).isSearching
+                    ? CustomSearchAppBar(
+                      onPressed: () {
+                        BlocProvider.of<SearchCubit>(context).isSearching =
+                            false;
+                        BlocProvider.of<SearchCubit>(
+                          context,
+                        ).changeSearchText('');
+                        setState(() {});
+                      },
+                    )
+                    : CustomAppBar(
+                          title: 'Notes',
+                          iconData: Icons.search,
                           onPressed: () {
-                            appBarIcon = Icons.search;
-                            isSearching = false;
+                            BlocProvider.of<SearchCubit>(context).isSearching =
+                                true;
                             setState(() {});
                           },
                         )
-                        : const Text('Notes', style: TextStyle(fontSize: 25)),
-              ),
-              iconData: appBarIcon,
-              onPressed: () {
-                isSearching = true;
-                appBarIcon = null;
-                setState(() {});
-              },
-            ),
+                        as PreferredSizeWidget,
+
             body: const NotesListView(),
           );
         },
