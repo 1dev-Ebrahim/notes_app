@@ -34,17 +34,19 @@ class _NotesListViewState extends State<NotesListView> {
                         horizontal: 16,
                       ),
                       child:
-                          notesList[index].title.contains(
+                          notesList[index].title.toLowerCase().contains(
                                 state is SearchTextChangedState
-                                    ? state.searchText
+                                    ? state.searchText.toLowerCase()
                                     : '',
                               )
                               ? NoteItem(noteModel: notesList[index])
-                              : notesList[index].subTitle.contains(
-                                state is SearchTextChangedState
-                                    ? state.searchText
-                                    : '',
-                              )
+                              : notesList[index].subTitle
+                                  .toLowerCase()
+                                  .contains(
+                                    state is SearchTextChangedState
+                                        ? state.searchText.toLowerCase()
+                                        : '',
+                                  )
                               ? NoteItem(noteModel: notesList[index])
                               : null,
                     ),
